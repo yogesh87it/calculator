@@ -1,5 +1,3 @@
-import "./styles.css";
-
 const num = document.querySelectorAll(".num");
 const opr = document.querySelectorAll(".opr");
 const equal = document.querySelector(".equal");
