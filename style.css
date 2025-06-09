@@ -27,6 +27,7 @@ body {
   justify-content: center;
   border-radius: 15px;
   background-color: rgb(42, 44, 46);
+  box-shadow: 5px 5px 0 0 rgb(36, 29, 29);
 }
 
 .btn-container {
@@ -41,10 +42,15 @@ button {
   width: 60px;
   font-size: 1.2rem;
   margin: 3px;
+  border: 8px outset silver;
+  background-color: rgb(192, 192, 160);
 }
 
+/*chnaged color and reduced border width and font size to give illusion of button press*/
 button:active {
-  color: "yellow";
+  color: rgb(241, 241, 236);
+  border-width: 5px;
+  font-size: 1.1rem;
 }
 
 .black {

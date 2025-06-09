@@ -5,32 +5,37 @@ const display = document.getElementById("app");
 const sqRt = document.querySelector(".sqRt");
 const cancel = document.querySelector(".cancel");
 const power = document.querySelector(".on-off");
-let isON = true;
+let isON = false;
 
 display.textContent = 0;
 let firstNum = "";
 let secondNum = "";
 let operand = "";
 let equalsTo = "";
+let answer = "";
 
 function mathOperation() {
   let conFirstNum = +firstNum;
   let conSecondNum = +secondNum;
+  try {
+    switch (operand) {
+      case "*":
+        return conFirstNum * conSecondNum;
+      case "/":
+        return conFirstNum / conSecondNum;
+      case "+":
+        return conFirstNum + conSecondNum;
+      case "-":
+        return conFirstNum - conSecondNum;
+      case "**":
+        return conFirstNum ** conSecondNum;
 
-  switch (operand) {
-    case "*":
-      return conFirstNum * conSecondNum;
-    case "/":
-      return conFirstNum / conSecondNum;
-    case "+":
-      return conFirstNum + conSecondNum;
-    case "-":
-      return conFirstNum - conSecondNum;
-    case "**":
-      return conFirstNum ** conSecondNum;
-
-    default:
-      return "";
+      default:
+        return "";
+    }
+  } catch (error) {
+    console.log(error);
+    display.textContent = "ERROR";
   }
 }
 
@@ -50,14 +55,14 @@ num.forEach((value) =>
 opr.forEach((value) =>
   value.addEventListener("click", () => {
     let displayOpr = value.textContent;
-    operand += displayOpr;
+    operand = displayOpr; // wrongly typed += inplace of just =, giving rise to errors if any operand typed more than once.
     display.textContent = displayOpr;
   })
 );
 
 equal.addEventListener("click", () => {
-  if (equalsTo === "") {
-    let answer = mathOperation().toFixed(6);
+  try {
+    answer = mathOperation().toFixed(6);
     //below if else needed else it will display 6 decimals even for integers
     if (answer % 1 === 0) {
       display.textContent = Math.trunc(answer);
@@ -65,15 +70,12 @@ equal.addEventListener("click", () => {
       display.textContent = answer;
     }
     firstNum = answer;
-    secondNum = ""; //else number will be firstdigit
-    operand = "";
-    equalsTo = "=";
-  } else {
-    display.textContent = firstNum;
-    //firstNum = "";
-    secondNum = "";
-    operand = "";
-    equalsTo = "=";
+    secondNum = ""; //else number will be firstdigit. Commented to have second number for continuos operatoin
+    //operand = ""; //commented to have continous operation.
+    //operand = "=";
+  } catch (error) {
+    console.log(error);
+    display.textContent = "ERROR";
   }
 });
 
